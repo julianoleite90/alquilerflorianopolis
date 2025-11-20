@@ -108,11 +108,33 @@ CREATE POLICY "Permitir todo para desenvolvimento"
 
 ## 📝 Verificar se Funcionou
 
-Após executar o setup, você pode verificar no Supabase Dashboard:
+### Método 1: Via Script (Recomendado)
 
-1. Vá em **Table Editor**
-2. Você deve ver as tabelas: `propiedades`, `banners`, `eventos`
-3. Se executou o seed, deve ver dados de exemplo
+Execute o script de verificação:
+
+```bash
+npm run db:verify
+```
+
+Este script irá:
+- ✅ Verificar se todas as tabelas existem
+- ✅ Contar registros em cada tabela
+- ✅ Testar a conexão com o banco
+- ✅ Verificar se os índices estão funcionando
+
+### Método 2: Via Supabase Dashboard
+
+1. Acesse o [Supabase Dashboard](https://supabase.com/dashboard)
+2. Vá em **Table Editor**
+3. Você deve ver as tabelas: `propiedades`, `banners`, `eventos`
+4. Se executou o seed, deve ver dados de exemplo
+
+### Método 3: Testar no Aplicativo
+
+1. Inicie o servidor: `npm run dev`
+2. Acesse `http://localhost:3000/dashboard`
+3. Tente criar uma nova propriedade
+4. Se funcionar, o banco está configurado corretamente!
 
 ## 🔄 Atualizar Schema
 

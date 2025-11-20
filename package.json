@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "env:local": "./scripts/switch-env.sh local",
-    "env:production": "./scripts/switch-env.sh production"
+    "env:production": "./scripts/switch-env.sh production",
+    "db:verify": "node scripts/verify-database.js",
+    "db:setup": "node scripts/setup-database.js"
   },
   "dependencies": {
     "@supabase/ssr": "^0.7.0",
