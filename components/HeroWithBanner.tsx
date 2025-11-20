@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { FiSearch } from 'react-icons/fi'
 import { createClient } from '@/lib/supabase/client'
 import { getBannersFromLocalStorage } from '@/lib/supabase/local-storage-fallback'
@@ -79,46 +78,64 @@ export default function HeroWithBanner() {
   const currentBanner = banners[currentIndex]
 
   return (
-    <section className="relative w-full overflow-hidden">
+    <section className="relative w-full">
       {/* Banner de fundo ou gradiente */}
       {hasBanners && currentBanner ? (
         <>
           {currentBanner.enlace ? (
             <Link href={currentBanner.enlace} className="block w-full">
-              <div className="relative w-full flex items-center justify-center bg-gray-900" style={{ minHeight: '320px' }}>
+              <div 
+                className="relative w-full bg-gray-900 flex items-center justify-center"
+                style={{
+                  minHeight: '400px',
+                  backgroundImage: `url(${currentBanner.imagen_url})`,
+                  backgroundSize: 'contain',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center center'
+                }}
+              >
                 <img
                   src={currentBanner.imagen_url}
                   alt={currentBanner.titulo || 'Banner'}
-                  className="w-full h-auto object-contain"
+                  className="w-full h-auto max-w-full"
                   style={{
                     display: 'block',
-                    maxHeight: '600px',
+                    maxHeight: '700px',
+                    objectFit: 'contain',
                     width: '100%',
-                    height: 'auto',
-                    objectFit: 'contain'
+                    height: 'auto'
                   }}
                 />
               </div>
             </Link>
           ) : (
-            <div className="relative w-full flex items-center justify-center bg-gray-900" style={{ minHeight: '320px' }}>
+            <div 
+              className="relative w-full bg-gray-900 flex items-center justify-center"
+              style={{
+                minHeight: '400px',
+                backgroundImage: `url(${currentBanner.imagen_url})`,
+                backgroundSize: 'contain',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center center'
+              }}
+            >
               <img
                 src={currentBanner.imagen_url}
                 alt={currentBanner.titulo || 'Banner'}
-                className="w-full h-auto object-contain"
+                className="w-full h-auto max-w-full"
                 style={{
                   display: 'block',
-                  maxHeight: '600px',
+                  maxHeight: '700px',
+                  objectFit: 'contain',
                   width: '100%',
-                  height: 'auto',
-                  objectFit: 'contain'
+                  height: 'auto'
                 }}
               />
             </div>
           )}
         </>
       ) : (
-        <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-800" style={{ minHeight: '320px' }}></div>
+        <div className="w-full bg-gradient-to-r from-primary-600 to-primary-800" style={{ minHeight: '400px' }}></div>
       )}
 
       {/* Overlay para contraste */}
@@ -128,7 +145,7 @@ export default function HeroWithBanner() {
 
       {/* Conteúdo sobreposto */}
       <div className="absolute inset-0 flex items-center justify-center px-4 pointer-events-none">
-        <div className="container-custom">
+        <div className="container-custom pointer-events-auto">
           <div className="max-w-3xl mx-auto text-center">
             {currentBanner?.titulo ? (
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 text-white px-2" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.6)' }}>
@@ -163,7 +180,7 @@ export default function HeroWithBanner() {
 
       {/* Indicadores de banner */}
       {banners.length > 1 && (
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
           {banners.map((_, index) => (
             <button
               key={index}
