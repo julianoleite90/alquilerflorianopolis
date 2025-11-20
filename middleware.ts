@@ -60,6 +60,9 @@ export async function middleware(request: NextRequest) {
       url.pathname = '/dashboard'
       return NextResponse.redirect(url)
     }
+    
+    // Permitir acesso à página de login se não estiver autenticado
+    return response
   }
 
   return NextResponse.next()
