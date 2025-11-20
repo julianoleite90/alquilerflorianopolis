@@ -39,6 +39,10 @@ async function createAdminUser() {
     process.exit(1);
   }
 
+  // Debug: mostrar URL (sem mostrar a chave)
+  log(`🔗 Conectando a: ${supabaseUrl}`, 'cyan');
+  log(`🔑 Service Role Key: ${serviceRoleKey.substring(0, 20)}...`, 'cyan');
+
   // Criar cliente com Service Role Key (tem permissões administrativas)
   const supabase = createClient(supabaseUrl, serviceRoleKey, {
     auth: {
@@ -109,6 +113,14 @@ async function createAdminUser() {
     }
   } catch (error) {
     log(`\n❌ Erro fatal: ${error.message}`, 'red');
+    if (error.cause) {
+      log(`   Causa: ${error.cause.message || error.cause}`, 'yellow');
+    }
+    log('\n💡 Verifique:', 'yellow');
+    log('   1. A URL do Supabase está correta?', 'reset');
+    log('   2. A Service Role Key está correta?', 'reset');
+    log('   3. Você tem conexão com a internet?', 'reset');
+    log('   4. O Supabase está acessível?', 'reset');
     process.exit(1);
   }
 }
