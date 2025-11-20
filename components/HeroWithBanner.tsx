@@ -85,28 +85,34 @@ export default function HeroWithBanner() {
         <>
           {currentBanner.enlace ? (
             <Link href={currentBanner.enlace} className="block w-full h-full">
-              <div className="relative w-full h-full flex items-center justify-center bg-gray-900">
-                <Image
+              <div className="relative w-full h-full flex items-center justify-center bg-gray-900 overflow-hidden">
+                <img
                   src={currentBanner.imagen_url}
                   alt={currentBanner.titulo || 'Banner'}
-                  width={1920}
-                  height={1080}
                   className="w-full h-full object-contain"
-                  priority
-                  sizes="100vw"
+                  style={{
+                    objectFit: 'contain',
+                    maxWidth: '100%',
+                    maxHeight: '100%',
+                    width: 'auto',
+                    height: 'auto'
+                  }}
                 />
               </div>
             </Link>
           ) : (
-            <div className="relative w-full h-full flex items-center justify-center bg-gray-900">
-              <Image
+            <div className="relative w-full h-full flex items-center justify-center bg-gray-900 overflow-hidden">
+              <img
                 src={currentBanner.imagen_url}
                 alt={currentBanner.titulo || 'Banner'}
-                width={1920}
-                height={1080}
                 className="w-full h-full object-contain"
-                priority
-                sizes="100vw"
+                style={{
+                  objectFit: 'contain',
+                  maxWidth: '100%',
+                  maxHeight: '100%',
+                  width: 'auto',
+                  height: 'auto'
+                }}
               />
             </div>
           )}
