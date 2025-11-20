@@ -40,7 +40,7 @@ export interface Database {
           descripcion: string
           tipo: 'casa' | 'departamento' | 'local' | 'oficina' | 'terreno'
           precio: number
-          moneda?: 'USD'
+          moneda?: 'USD' | 'BRL'
           periodo?: 'diaria' | 'mensal'
           direccion: string
           ciudad: string
@@ -51,6 +51,7 @@ export interface Database {
           habitaciones?: number | null
           banios?: number | null
           metros_cuadrados?: number | null
+          estadia_minima?: number | null
           imagenes?: string[]
           caracteristicas?: string[]
           disponible?: boolean
@@ -63,7 +64,7 @@ export interface Database {
           descripcion?: string
           tipo?: 'casa' | 'departamento' | 'local' | 'oficina' | 'terreno'
           precio?: number
-          moneda?: 'USD'
+          moneda?: 'USD' | 'BRL'
           periodo?: 'diaria' | 'mensal'
           direccion?: string
           ciudad?: string
@@ -74,6 +75,7 @@ export interface Database {
           habitaciones?: number | null
           banios?: number | null
           metros_cuadrados?: number | null
+          estadia_minima?: number | null
           imagenes?: string[]
           caracteristicas?: string[]
           disponible?: boolean
@@ -140,7 +142,7 @@ export interface Database {
     }
     Enums: {
       tipo_propiedad: 'casa' | 'departamento' | 'local' | 'oficina' | 'terreno'
-      moneda: 'USD'
+      moneda: 'USD' | 'BRL'
       periodo: 'diaria' | 'mensal'
     }
   }
