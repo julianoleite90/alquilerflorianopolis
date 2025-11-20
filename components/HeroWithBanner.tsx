@@ -79,47 +79,55 @@ export default function HeroWithBanner() {
   const currentBanner = banners[currentIndex]
 
   return (
-    <section className="relative w-full min-h-[320px] sm:min-h-[400px] md:min-h-[550px] lg:min-h-[600px] overflow-hidden">
+    <section className="relative w-full overflow-hidden">
       {/* Banner de fundo ou gradiente */}
       {hasBanners && currentBanner ? (
         <>
           {currentBanner.enlace ? (
-            <Link href={currentBanner.enlace} className="block w-full h-full">
-              <div className="relative w-full min-h-[320px] sm:min-h-[400px] md:min-h-[550px] lg:min-h-[600px] flex items-center justify-center bg-gray-900">
+            <Link href={currentBanner.enlace} className="block w-full">
+              <div className="relative w-full flex items-center justify-center bg-gray-900" style={{ minHeight: '320px' }}>
                 <img
                   src={currentBanner.imagen_url}
                   alt={currentBanner.titulo || 'Banner'}
-                  className="w-full h-auto max-h-[600px] object-contain"
+                  className="w-full h-auto object-contain"
                   style={{
                     display: 'block',
-                    margin: '0 auto'
+                    maxHeight: '600px',
+                    width: '100%',
+                    height: 'auto',
+                    objectFit: 'contain'
                   }}
                 />
               </div>
             </Link>
           ) : (
-            <div className="relative w-full min-h-[320px] sm:min-h-[400px] md:min-h-[550px] lg:min-h-[600px] flex items-center justify-center bg-gray-900">
+            <div className="relative w-full flex items-center justify-center bg-gray-900" style={{ minHeight: '320px' }}>
               <img
                 src={currentBanner.imagen_url}
                 alt={currentBanner.titulo || 'Banner'}
-                className="w-full h-auto max-h-[600px] object-contain"
+                className="w-full h-auto object-contain"
                 style={{
                   display: 'block',
-                  margin: '0 auto'
+                  maxHeight: '600px',
+                  width: '100%',
+                  height: 'auto',
+                  objectFit: 'contain'
                 }}
               />
             </div>
           )}
         </>
       ) : (
-        <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-800"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-800" style={{ minHeight: '320px' }}></div>
       )}
 
       {/* Overlay para contraste */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/60 pointer-events-none" />
+      {hasBanners && currentBanner && (
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/60 pointer-events-none" />
+      )}
 
       {/* Conteúdo sobreposto */}
-      <div className="absolute inset-0 flex items-center justify-center px-4">
+      <div className="absolute inset-0 flex items-center justify-center px-4 pointer-events-none">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto text-center">
             {currentBanner?.titulo ? (
