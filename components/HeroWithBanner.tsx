@@ -87,7 +87,8 @@ export default function HeroWithBanner() {
               <div 
                 className="relative w-full bg-gray-900 flex items-center justify-center"
                 style={{
-                  minHeight: '400px',
+                  minHeight: '250px',
+                  maxHeight: '350px',
                   backgroundImage: `url(${currentBanner.imagen_url})`,
                   backgroundSize: 'contain',
                   backgroundRepeat: 'no-repeat',
@@ -100,7 +101,7 @@ export default function HeroWithBanner() {
                   className="w-full h-auto max-w-full"
                   style={{
                     display: 'block',
-                    maxHeight: '700px',
+                    maxHeight: '350px',
                     objectFit: 'contain',
                     width: '100%',
                     height: 'auto'
@@ -112,7 +113,8 @@ export default function HeroWithBanner() {
             <div 
               className="relative w-full bg-gray-900 flex items-center justify-center"
               style={{
-                minHeight: '400px',
+                minHeight: '250px',
+                maxHeight: '350px',
                 backgroundImage: `url(${currentBanner.imagen_url})`,
                 backgroundSize: 'contain',
                 backgroundRepeat: 'no-repeat',
@@ -125,7 +127,7 @@ export default function HeroWithBanner() {
                 className="w-full h-auto max-w-full"
                 style={{
                   display: 'block',
-                  maxHeight: '700px',
+                  maxHeight: '350px',
                   objectFit: 'contain',
                   width: '100%',
                   height: 'auto'
@@ -135,7 +137,7 @@ export default function HeroWithBanner() {
           )}
         </>
       ) : (
-        <div className="w-full bg-gradient-to-r from-primary-600 to-primary-800" style={{ minHeight: '400px' }}></div>
+        <div className="w-full bg-gradient-to-r from-primary-600 to-primary-800" style={{ minHeight: '250px', maxHeight: '350px' }}></div>
       )}
 
       {/* Overlay para contraste */}
