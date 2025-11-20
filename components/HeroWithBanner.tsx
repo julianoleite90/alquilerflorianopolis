@@ -79,39 +79,33 @@ export default function HeroWithBanner() {
   const currentBanner = banners[currentIndex]
 
   return (
-    <section className="relative w-full h-[320px] sm:h-[400px] md:h-[550px] lg:h-[600px] overflow-hidden">
+    <section className="relative w-full min-h-[320px] sm:min-h-[400px] md:min-h-[550px] lg:min-h-[600px] overflow-hidden">
       {/* Banner de fundo ou gradiente */}
       {hasBanners && currentBanner ? (
         <>
           {currentBanner.enlace ? (
             <Link href={currentBanner.enlace} className="block w-full h-full">
-              <div className="relative w-full h-full flex items-center justify-center bg-gray-900 overflow-hidden">
+              <div className="relative w-full min-h-[320px] sm:min-h-[400px] md:min-h-[550px] lg:min-h-[600px] flex items-center justify-center bg-gray-900">
                 <img
                   src={currentBanner.imagen_url}
                   alt={currentBanner.titulo || 'Banner'}
-                  className="w-full h-full object-contain"
+                  className="w-full h-auto max-h-[600px] object-contain"
                   style={{
-                    objectFit: 'contain',
-                    maxWidth: '100%',
-                    maxHeight: '100%',
-                    width: 'auto',
-                    height: 'auto'
+                    display: 'block',
+                    margin: '0 auto'
                   }}
                 />
               </div>
             </Link>
           ) : (
-            <div className="relative w-full h-full flex items-center justify-center bg-gray-900 overflow-hidden">
+            <div className="relative w-full min-h-[320px] sm:min-h-[400px] md:min-h-[550px] lg:min-h-[600px] flex items-center justify-center bg-gray-900">
               <img
                 src={currentBanner.imagen_url}
                 alt={currentBanner.titulo || 'Banner'}
-                className="w-full h-full object-contain"
+                className="w-full h-auto max-h-[600px] object-contain"
                 style={{
-                  objectFit: 'contain',
-                  maxWidth: '100%',
-                  maxHeight: '100%',
-                  width: 'auto',
-                  height: 'auto'
+                  display: 'block',
+                  margin: '0 auto'
                 }}
               />
             </div>
