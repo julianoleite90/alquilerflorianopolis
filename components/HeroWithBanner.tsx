@@ -91,7 +91,7 @@ export default function HeroWithBanner() {
                   backgroundImage: `url(${currentBanner.imagen_url})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center center',
-                  transform: 'scale(1.1)',
+                  transform: 'scale(0.9)',
                   transition: 'transform 0.3s ease'
                 }}
               >
@@ -113,7 +113,7 @@ export default function HeroWithBanner() {
                 backgroundImage: `url(${currentBanner.imagen_url})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
-                transform: 'scale(1.1)',
+                transform: 'scale(0.9)',
                 transition: 'transform 0.3s ease'
               }}
             >
