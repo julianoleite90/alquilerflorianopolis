@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import AuthGuard from '@/components/AuthGuard'
@@ -60,6 +60,15 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode
 }) {
+  const pathname = usePathname()
+  const isLoginPage = pathname === '/dashboard/login'
+
+  // Se for a página de login, não aplicar o layout do dashboard
+  if (isLoginPage) {
+    return <>{children}</>
+  }
+
+  // Para outras páginas do dashboard, aplicar o AuthGuard e o layout
   return (
     <AuthGuard>
       <div className="min-h-screen bg-gray-50">
