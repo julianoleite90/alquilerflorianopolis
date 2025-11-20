@@ -207,7 +207,3 @@ export type Barrio = Database['public']['Tables']['barrios']['Row']
 export type BarrioInsert = Database['public']['Tables']['barrios']['Insert']
 export type BarrioUpdate = Database['public']['Tables']['barrios']['Update']
 
-export type Barrio = Database['public']['Tables']['barrios']['Row']
-export type BarrioInsert = Database['public']['Tables']['barrios']['Insert']
-export type BarrioUpdate = Database['public']['Tables']['barrios']['Update']
-
