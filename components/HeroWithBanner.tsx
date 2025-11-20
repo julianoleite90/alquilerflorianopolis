@@ -90,8 +90,11 @@ export default function HeroWithBanner() {
                   src={currentBanner.imagen_url}
                   alt={currentBanner.titulo || 'Banner'}
                   fill
-                  className="object-cover object-center"
-                  style={{ objectPosition: 'center center' }}
+                  className="object-contain object-center"
+                  style={{ 
+                    objectPosition: 'center center',
+                    transform: 'scale(0.85)'
+                  }}
                   priority
                   sizes="100vw"
                 />
@@ -103,8 +106,11 @@ export default function HeroWithBanner() {
                 src={currentBanner.imagen_url}
                 alt={currentBanner.titulo || 'Banner'}
                 fill
-                className="object-cover object-center"
-                style={{ objectPosition: 'center center' }}
+                className="object-contain object-center"
+                style={{ 
+                  objectPosition: 'center center',
+                  transform: 'scale(0.85)'
+                }}
                 priority
                 sizes="100vw"
               />
