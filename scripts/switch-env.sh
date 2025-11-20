@@ -30,25 +30,18 @@ EOF
 
 elif [ "$ENV_TYPE" = "production" ]; then
   echo "Configurando para ambiente PRODUÇÃO..."
-  cat > .env.local << 'EOF'
-# Supabase Production
-NEXT_PUBLIC_SUPABASE_URL=https://dljqkpaxmkxlmwzmqecb.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRsanFrcGF4bWt4bG13em1xZWNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM1OTk1NjEsImV4cCI6MjA3OTE3NTU2MX0.bQ7oBq6MRy5XX_A1tzVxPfKGbCkZDEMkbv7snNsrA5A
-
-SUPABASE_URL=https://dljqkpaxmkxlmwzmqecb.supabase.co
-SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRsanFrcGF4bWt4bG13em1xZWNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM1OTk1NjEsImV4cCI6MjA3OTE3NTU2MX0.bQ7oBq6MRy5XX_A1tzVxPfKGbCkZDEMkbv7snNsrA5A
-SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRsanFrcGF4bWt4bG13em1xZWNiIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MzU5OTU2MSwiZXhwIjoyMDc5MTc1NTYxfQ.Nc_LKMq5BLVsxIw-MPpZNuAobe6miVqft0K8y7KVEN8
-
-POSTGRES_URL=postgres://postgres.dljqkpaxmkxlmwzmqecb:RJ5pfSNSFK2wlBj4@aws-1-sa-east-1.pooler.supabase.com:6543/postgres?sslmode=require&pgbouncer=true&supa=base-pooler.x
-POSTGRES_URL_NON_POOLING=postgres://postgres.dljqkpaxmkxlmwzmqecb:RJ5pfSNSFK2wlBj4@aws-1-sa-east-1.pooler.supabase.com:5432/postgres?sslmode=require
-POSTGRES_HOST=db.dljqkpaxmkxlmwzmqecb.supabase.co
-POSTGRES_DATABASE=postgres
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=RJ5pfSNSFK2wlBj4
-
-NEXT_PUBLIC_SITE_URL=https://alquilerenflorianopolis.com
-EOF
-  echo "✅ Ambiente PRODUÇÃO configurado!"
+  echo ""
+  echo "⚠️  IMPORTANTE: Você precisa configurar manualmente as credenciais de produção."
+  echo "Crie um arquivo .env.local com as seguintes variáveis:"
+  echo ""
+  echo "NEXT_PUBLIC_SUPABASE_URL=tu_url_de_supabase"
+  echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=tu_clave_anonima"
+  echo "SUPABASE_SERVICE_ROLE_KEY=tu_clave_de_servicio"
+  echo "NEXT_PUBLIC_SITE_URL=tu_url_del_sitio"
+  echo ""
+  echo "⚠️  NUNCA commite o arquivo .env.local com credenciais reais!"
+  echo ""
+  echo "✅ Instruções salvas. Configure manualmente o .env.local com suas credenciais."
 
 else
   echo "❌ Tipo inválido: $ENV_TYPE"
