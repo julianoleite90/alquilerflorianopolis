@@ -11,7 +11,8 @@
     "env:production": "./scripts/switch-env.sh production",
     "db:verify": "node scripts/verify-database.js",
     "db:setup": "node scripts/setup-database.js",
-    "admin:create": "node scripts/create-admin-user.js"
+    "admin:create": "node scripts/create-admin-user.js",
+    "admin:check": "node scripts/check-admin-user.js"
   },
   "dependencies": {
     "@supabase/ssr": "^0.7.0",
