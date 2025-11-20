@@ -1,6 +1,6 @@
 # 🚀 Criar Usuário Admin em Produção
 
-Como você está em produção, a forma mais simples é criar o usuário diretamente no Dashboard do Supabase.
+⚠️ **IMPORTANTE**: O Supabase Auth **NÃO permite** criar usuários diretamente via SQL por segurança. Use uma das opções abaixo.
 
 ## 📋 Passo a Passo
 
