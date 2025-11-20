@@ -85,46 +85,28 @@ export default function HeroWithBanner() {
         <>
           {currentBanner.enlace ? (
             <Link href={currentBanner.enlace} className="block w-full h-full">
-              <div 
-                className="relative w-full h-full bg-cover bg-center bg-no-repeat"
-                style={{ 
-                  backgroundImage: `url(${currentBanner.imagen_url})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center center',
-                  transform: 'scale(0.9)',
-                  transition: 'transform 0.3s ease'
-                }}
-              >
+              <div className="relative w-full h-full flex items-center justify-center bg-gray-900">
                 <Image
                   src={currentBanner.imagen_url}
                   alt={currentBanner.titulo || 'Banner'}
-                  fill
-                  className="object-cover opacity-0"
+                  width={1920}
+                  height={1080}
+                  className="w-full h-full object-contain"
                   priority
                   sizes="100vw"
-                  aria-hidden="true"
                 />
               </div>
             </Link>
           ) : (
-            <div 
-              className="relative w-full h-full bg-cover bg-center bg-no-repeat"
-              style={{ 
-                backgroundImage: `url(${currentBanner.imagen_url})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center center',
-                transform: 'scale(0.9)',
-                transition: 'transform 0.3s ease'
-              }}
-            >
+            <div className="relative w-full h-full flex items-center justify-center bg-gray-900">
               <Image
                 src={currentBanner.imagen_url}
                 alt={currentBanner.titulo || 'Banner'}
-                fill
-                className="object-cover opacity-0"
+                width={1920}
+                height={1080}
+                className="w-full h-full object-contain"
                 priority
                 sizes="100vw"
-                aria-hidden="true"
               />
             </div>
           )}
