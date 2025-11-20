@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server'
+import { createReadonlyClient } from '@/lib/supabase/server-readonly'
 import PropiedadesClient from './PropiedadesClient'
 import { generateMetadata as generateSEOMetadata } from '@/lib/seo'
 import { getBarrioBySlug } from '@/data/barrios'
@@ -58,7 +58,7 @@ export default async function PropiedadesPage({
   let propiedades: any[] = []
   
   try {
-    const supabase = await createClient()
+    const supabase = createReadonlyClient()
     let query = supabase
       .from('propiedades')
       .select('*')

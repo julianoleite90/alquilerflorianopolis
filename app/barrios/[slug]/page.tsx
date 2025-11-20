@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { createClient } from '@/lib/supabase/server'
+import { createReadonlyClient } from '@/lib/supabase/server-readonly'
 import PropiedadesList from '@/components/PropiedadesList'
 import { getBarrioBySlug, BARRIOS } from '@/data/barrios'
 import { generateBarrioMetadata } from '@/lib/seo'
@@ -33,7 +33,7 @@ export default async function BarrioPage({ params }: BarrioPageProps) {
   let propiedades: any[] = []
   
   try {
-    const supabase = await createClient()
+    const supabase = createReadonlyClient()
     const { data, error } = await supabase
       .from('propiedades')
       .select('*')

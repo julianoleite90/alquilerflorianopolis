@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { createClient } from '@/lib/supabase/server'
+import { createReadonlyClient } from '@/lib/supabase/server-readonly'
 import { BARRIOS } from '@/data/barrios'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -31,7 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Agregar propiedades individuales
   try {
-    const supabase = await createClient()
+    const supabase = createReadonlyClient()
     const { data: propiedades } = await supabase
       .from('propiedades')
       .select('id, updated_at')

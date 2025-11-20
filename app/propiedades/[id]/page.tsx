@@ -1,4 +1,4 @@
-import { createClient } from '@/lib/supabase/server'
+import { createReadonlyClient } from '@/lib/supabase/server-readonly'
 import PropiedadDetailClient from './PropiedadDetailClient'
 import { generatePropiedadMetadata, generateStructuredData } from '@/lib/seo'
 import type { Metadata } from 'next'
@@ -12,7 +12,7 @@ export async function generateMetadata({
   let propiedad: any = null
   
   try {
-    const supabase = await createClient()
+    const supabase = createReadonlyClient()
     const { data, error } = await supabase
       .from('propiedades')
       .select('*')
@@ -49,7 +49,7 @@ export default async function PropiedadDetailPage({
   let propiedad: any = null
   
   try {
-    const supabase = await createClient()
+    const supabase = createReadonlyClient()
     const { data, error } = await supabase
       .from('propiedades')
       .select('*')

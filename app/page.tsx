@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { FiSearch, FiHome, FiMapPin, FiDollarSign, FiSun, FiCalendar } from 'react-icons/fi'
-import { createClient } from '@/lib/supabase/server'
+import { createReadonlyClient } from '@/lib/supabase/server-readonly'
 import PropiedadesListWithFilter from '@/components/PropiedadesListWithFilter'
 import HeroWithBanner from '@/components/HeroWithBanner'
 import EventosList from '@/components/EventosList'
@@ -20,7 +20,7 @@ export default async function Home() {
   let eventos: any[] = []
   
   try {
-    const supabase = await createClient()
+    const supabase = createReadonlyClient()
     const { data: propiedadesData, error: propiedadesError } = await supabase
       .from('propiedades')
       .select('*')
