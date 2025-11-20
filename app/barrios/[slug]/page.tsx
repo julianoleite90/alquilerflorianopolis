@@ -13,7 +13,36 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: BarrioPageProps) {
-  const barrio = getBarrioBySlug(params.slug)
+  let barrio = getBarrioBySlug(params.slug)
+  
+  // Intentar buscar del banco primero
+  if (!barrio) {
+    try {
+      const supabase = createReadonlyClient()
+      const { data } = await supabase
+        .from('barrios')
+        .select('*')
+        .eq('slug', params.slug)
+        .eq('activo', true)
+        .single()
+      
+      if (data) {
+        barrio = {
+          slug: data.slug,
+          nombre: data.nombre,
+          descripcion: data.descripcion,
+          descripcionSeo: data.descripcion_seo,
+          keywords: data.keywords || [],
+          regiao: data.regiao,
+          coverImage: data.cover_image,
+          highlights: data.highlights || [],
+        }
+      }
+    } catch (error) {
+      console.warn('Error al cargar barrio para metadata:', error)
+    }
+  }
+
   if (!barrio) {
     return {
       title: 'Barrio no encontrado - Alquiler en Florianópolis',
@@ -25,7 +54,36 @@ export async function generateMetadata({ params }: BarrioPageProps) {
 }
 
 export default async function BarrioPage({ params }: BarrioPageProps) {
-  const barrio = getBarrioBySlug(params.slug)
+  let barrio: any = getBarrioBySlug(params.slug)
+  
+  // Intentar buscar del banco primero
+  if (!barrio) {
+    try {
+      const supabase = createReadonlyClient()
+      const { data } = await supabase
+        .from('barrios')
+        .select('*')
+        .eq('slug', params.slug)
+        .eq('activo', true)
+        .single()
+      
+      if (data) {
+        barrio = {
+          slug: data.slug,
+          nombre: data.nombre,
+          descripcion: data.descripcion,
+          descripcionSeo: data.descripcion_seo,
+          keywords: data.keywords || [],
+          regiao: data.regiao,
+          coverImage: data.cover_image,
+          highlights: data.highlights || [],
+        }
+      }
+    } catch (error) {
+      console.warn('Error al cargar barrio:', error)
+    }
+  }
+
   if (!barrio) {
     notFound()
   }
@@ -54,17 +112,19 @@ export default async function BarrioPage({ params }: BarrioPageProps) {
         <div className="container-custom px-4 md:px-0">
           <p className="uppercase tracking-[0.35em] text-xs mb-3 text-white/70">Barrio</p>
           <h1 className="text-3xl md:text-4xl font-bold mb-4">{barrio.nombre}</h1>
-          <p className="text-base md:text-lg max-w-3xl">{barrio.descripcionSeo}</p>
-          <div className="flex flex-wrap gap-2 mt-6">
-            {barrio.highlights.map((highlight) => (
-              <span
-                key={highlight}
-                className="px-3 py-1 rounded-full border border-white/40 text-sm"
-              >
-                {highlight}
-              </span>
-            ))}
-          </div>
+          <p className="text-base md:text-lg max-w-3xl">{barrio.descripcionSeo || barrio.descripcion}</p>
+          {barrio.highlights && barrio.highlights.length > 0 && (
+            <div className="flex flex-wrap gap-2 mt-6">
+              {barrio.highlights.map((highlight: string, idx: number) => (
+                <span
+                  key={idx}
+                  className="px-3 py-1 rounded-full border border-white/40 text-sm"
+                >
+                  {highlight}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -86,5 +146,3 @@ export default async function BarrioPage({ params }: BarrioPageProps) {
     </div>
   )
 }
-
-

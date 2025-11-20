@@ -5,7 +5,7 @@ import { useRouter, usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import AuthGuard from '@/components/AuthGuard'
-import { FiHome, FiPlus, FiList, FiLogOut, FiImage, FiTrash2, FiCalendar, FiUser } from 'react-icons/fi'
+import { FiHome, FiPlus, FiList, FiLogOut, FiImage, FiTrash2, FiCalendar, FiUser, FiMapPin } from 'react-icons/fi'
 
 function LogoutButton() {
   const router = useRouter()
@@ -109,6 +109,13 @@ export default function DashboardLayout({
                 >
                   <FiCalendar />
                   <span>Eventos</span>
+                </Link>
+                <Link
+                  href="/dashboard/barrios"
+                  className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors"
+                >
+                  <FiMapPin />
+                  <span>Barrios</span>
                 </Link>
                 {process.env.NODE_ENV !== 'production' && (
                   <Link

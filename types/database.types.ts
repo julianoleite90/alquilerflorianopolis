@@ -133,6 +133,53 @@ export interface Database {
           updated_at?: string
         }
       }
+      barrios: {
+        Row: {
+          id: string
+          slug: string
+          nombre: string
+          descripcion: string
+          descripcion_seo: string
+          keywords: string[]
+          regiao: 'norte_da_ilha' | 'sul_da_ilha' | 'centro' | 'continente'
+          cover_image: string
+          highlights: string[]
+          activo: boolean
+          orden: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          slug: string
+          nombre: string
+          descripcion: string
+          descripcion_seo: string
+          keywords?: string[]
+          regiao: 'norte_da_ilha' | 'sul_da_ilha' | 'centro' | 'continente'
+          cover_image: string
+          highlights?: string[]
+          activo?: boolean
+          orden?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          slug?: string
+          nombre?: string
+          descripcion?: string
+          descripcion_seo?: string
+          keywords?: string[]
+          regiao?: 'norte_da_ilha' | 'sul_da_ilha' | 'centro' | 'continente'
+          cover_image?: string
+          highlights?: string[]
+          activo?: boolean
+          orden?: number
+          created_at?: string
+          updated_at?: string
+        }
+      }
     }
     Views: {
       [_ in never]: never
@@ -155,4 +202,8 @@ export type PropiedadUpdate = Database['public']['Tables']['propiedades']['Updat
 export type Evento = Database['public']['Tables']['eventos']['Row']
 export type EventoInsert = Database['public']['Tables']['eventos']['Insert']
 export type EventoUpdate = Database['public']['Tables']['eventos']['Update']
+
+export type Barrio = Database['public']['Tables']['barrios']['Row']
+export type BarrioInsert = Database['public']['Tables']['barrios']['Insert']
+export type BarrioUpdate = Database['public']['Tables']['barrios']['Update']
 
