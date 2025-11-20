@@ -36,8 +36,16 @@ export default function FormBanner({ banner }: FormBannerProps) {
   const [useLocalStorage, setUseLocalStorage] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
+  const isProduction = process.env.NODE_ENV === 'production'
+
   // Testear conexión al montar el componente
   useEffect(() => {
+    // Em produção, não usar localStorage
+    if (isProduction) {
+      setUseLocalStorage(false)
+      return
+    }
+
     testSupabaseConnection().then((result) => {
       if (!result.success) {
         // Solo mostrar aviso si no es un error esperado de desarrollo
@@ -47,10 +55,12 @@ export default function FormBanner({ banner }: FormBannerProps) {
         setUseLocalStorage(true)
       }
     }).catch(() => {
-      // Si falla la conexión, usar localStorage silenciosamente
-      setUseLocalStorage(true)
+      // Si falla la conexión, usar localStorage silenciosamente apenas em dev
+      if (!isProduction) {
+        setUseLocalStorage(true)
+      }
     })
-  }, [])
+  }, [isProduction])
 
   const {
     register,

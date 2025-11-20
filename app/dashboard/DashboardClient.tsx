@@ -11,25 +11,33 @@ import type { Propiedad } from '@/types/database.types'
 export default function DashboardClient({ initialPropiedades }: { initialPropiedades: Propiedad[] }) {
   const [propiedades, setPropiedades] = useState<Propiedad[]>(initialPropiedades || [])
   const [useLocalStorage, setUseLocalStorage] = useState(false)
+  const isProduction = process.env.NODE_ENV === 'production'
 
   useEffect(() => {
-    // Verificar si necesita usar localStorage
-    if (initialPropiedades.length === 0 || initialPropiedades.some(p => p.id?.startsWith('local-'))) {
-      setUseLocalStorage(true)
-      loadFromLocalStorage()
-    }
-
-    // Verificar periódicamente por actualizaciones en localStorage
-    const interval = setInterval(() => {
-      if (useLocalStorage) {
+    // Em produção, sempre usar Supabase (initialPropiedades vem do servidor)
+    // localStorage só como fallback em desenvolvimento
+    if (!isProduction) {
+      // Verificar si necesita usar localStorage apenas em desenvolvimento
+      if (initialPropiedades.length === 0 || initialPropiedades.some(p => p.id?.startsWith('local-'))) {
+        setUseLocalStorage(true)
         loadFromLocalStorage()
       }
-    }, 1000)
 
-    return () => clearInterval(interval)
-  }, [useLocalStorage])
+      // Verificar periódicamente por actualizaciones en localStorage apenas em dev
+      const interval = setInterval(() => {
+        if (useLocalStorage) {
+          loadFromLocalStorage()
+        }
+      }, 1000)
+
+      return () => clearInterval(interval)
+    }
+    // Em produção, usar apenas as propriedades do servidor (Supabase)
+  }, [useLocalStorage, isProduction])
 
   const loadFromLocalStorage = () => {
+    if (isProduction) return // Não usar localStorage em produção
+    
     const localPropiedades = getPropiedadesFromLocalStorage()
     if (localPropiedades.length > 0) {
       setPropiedades(localPropiedades as Propiedad[])
@@ -43,7 +51,7 @@ export default function DashboardClient({ initialPropiedades }: { initialPropied
         <div>
           <h1 className="text-3xl font-bold mb-2">Gestión de Propiedades</h1>
           <p className="text-gray-600">Administra todas tus propiedades</p>
-          {useLocalStorage && (
+          {useLocalStorage && !isProduction && (
             <p className="text-sm text-yellow-600 mt-1">
               ⚠️ Modo desarrollo: usando localStorage
             </p>

@@ -21,14 +21,20 @@ export default async function DashboardPage() {
       .order('created_at', { ascending: false })
     
     if (error) {
-      console.warn('Error al cargar desde Supabase, usando localStorage:', error)
-      // Fallback para localStorage no servidor no funciona, entonces retornamos vacío
-      // El cliente va a cargar del localStorage
+      console.error('Error al cargar desde Supabase:', error)
+      // Em produção, não usar localStorage - retornar vazio e mostrar erro
+      if (process.env.NODE_ENV === 'production') {
+        console.error('ERRO: Supabase não está funcionando em produção!', error)
+      }
     } else {
       propiedades = data || []
     }
   } catch (error) {
-    console.warn('Error de conexión con Supabase, el cliente usará localStorage:', error)
+    console.error('Error de conexión con Supabase:', error)
+    // Em produção, não usar localStorage
+    if (process.env.NODE_ENV === 'production') {
+      console.error('ERRO CRÍTICO: Não foi possível conectar ao Supabase em produção!', error)
+    }
   }
 
   return <DashboardClient initialPropiedades={propiedades} />

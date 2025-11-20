@@ -13,7 +13,8 @@ interface BannersListClientProps {
 
 export default function BannersListClient({ initialBanners, useLocalStorage: initialUseLocalStorage }: BannersListClientProps) {
   const [banners, setBanners] = useState<any[]>(initialBanners || [])
-  const [useLocalStorage, setUseLocalStorage] = useState(initialUseLocalStorage)
+  const isProduction = process.env.NODE_ENV === 'production'
+  const [useLocalStorage, setUseLocalStorage] = useState(isProduction ? false : initialUseLocalStorage)
 
   useEffect(() => {
     if (useLocalStorage) {
@@ -34,15 +35,17 @@ export default function BannersListClient({ initialBanners, useLocalStorage: ini
     return () => clearInterval(interval)
   }, [useLocalStorage])
 
-  if (useLocalStorage && banners.length === 0) {
+  if (useLocalStorage && banners.length === 0 && !isProduction) {
     return (
       <div className="bg-white rounded-lg shadow-md p-12 text-center">
         <p className="text-gray-600 text-lg mb-4">
           No hay banners registrados aún.
         </p>
-        <p className="text-sm text-blue-600 mb-4">
-          💡 Modo desarrollo: Los banners se guardan en localStorage (temporal).
-        </p>
+        {!isProduction && (
+          <p className="text-sm text-blue-600 mb-4">
+            💡 Modo desarrollo: Los banners se guardan en localStorage (temporal).
+          </p>
+        )}
         <Link href="/dashboard/banners/nuevo" className="btn-primary inline-block">
           Crear primer banner
         </Link>
@@ -52,7 +55,7 @@ export default function BannersListClient({ initialBanners, useLocalStorage: ini
 
   return (
     <>
-      {useLocalStorage && (
+      {useLocalStorage && !isProduction && (
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-6">
           <p className="text-sm text-blue-800">
             💡 Modo desarrollo: Los banners se guardan en localStorage. Para producción, inicia Supabase con "supabase start".

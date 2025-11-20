@@ -280,17 +280,32 @@ export default function FormPropiedad({ propiedad }: FormPropiedadProps) {
         userMessage = `⚠️ El almacenamiento local está lleno (${errorMessage}).\n\nSugerencias:\n- Elimine algunas propiedades o imágenes antiguas\n- Reduzca el número de imágenes por propiedad\n- Configure Supabase para usar almacenamiento en la nube\n- Use imágenes más pequeñas o comprimidas`
         setUseLocalStorage(true)
       } else if (errorMessage.includes('relation') && errorMessage.includes('does not exist')) {
-        userMessage = 'La tabla "propiedades" no existe. Ejecuta la migración SQL en Supabase. Usando modo desarrollo (localStorage).'
-        setUseLocalStorage(true)
+        const isProduction = process.env.NODE_ENV === 'production'
+        if (isProduction) {
+          userMessage = 'La tabla "propiedades" no existe. Ejecuta la migración SQL en Supabase.'
+        } else {
+          userMessage = 'La tabla "propiedades" no existe. Ejecuta la migración SQL en Supabase. Usando modo desarrollo (localStorage).'
+          setUseLocalStorage(true)
+        }
       } else if (errorMessage.includes('permission denied') || errorMessage.includes('policy')) {
-        userMessage = 'Error de permisos. Usando modo desarrollo (localStorage).'
-        setUseLocalStorage(true)
+        const isProduction = process.env.NODE_ENV === 'production'
+        if (isProduction) {
+          userMessage = 'Error de permisos. Verifique as políticas RLS no Supabase.'
+        } else {
+          userMessage = 'Error de permisos. Usando modo desarrollo (localStorage).'
+          setUseLocalStorage(true)
+        }
       } else if (errorMessage.includes('fetch') || errorMessage.includes('network') || errorMessage.includes('Failed to fetch')) {
-        userMessage = 'Supabase no disponible. Usando modo desarrollo (localStorage).'
-        setUseLocalStorage(true)
+        const isProduction = process.env.NODE_ENV === 'production'
+        if (isProduction) {
+          userMessage = 'Error de conexión con Supabase. Verifique as variáveis de ambiente no Vercel.'
+        } else {
+          userMessage = 'Supabase no disponible. Usando modo desarrollo (localStorage).'
+          setUseLocalStorage(true)
+        }
       } else {
         userMessage = `Error: ${errorMessage}`
-        if (useLocalStorage) {
+        if (useLocalStorage && process.env.NODE_ENV !== 'production') {
           userMessage += '\n\nUsando modo desarrollo (localStorage).'
         }
       }
