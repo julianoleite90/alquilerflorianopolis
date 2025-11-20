@@ -43,6 +43,27 @@ export default function FormBanner({ banner }: FormBannerProps) {
   useEffect(() => {
     if (isProduction) {
       setUseLocalStorage(false)
+      // Em produção, testar conexão com Supabase
+      const testConnection = async () => {
+        try {
+          const { data, error } = await supabase
+            .from('banners')
+            .select('id')
+            .limit(1)
+          
+          if (error) {
+            console.error('Error de conexión con Supabase:', error)
+            if (error.code === 'PGRST116' || error.message?.includes('does not exist')) {
+              setConnectionStatus('❌ La tabla "banners" no existe. Ejecuta setup-database.sql en Supabase.')
+            } else if (error.code === '42501' || error.message?.includes('permission denied')) {
+              setConnectionStatus('❌ Error de permisos. Verifica las políticas RLS en Supabase.')
+            }
+          }
+        } catch (err) {
+          console.error('Error al testar conexión:', err)
+        }
+      }
+      testConnection()
       return
     }
 
@@ -58,7 +79,7 @@ export default function FormBanner({ banner }: FormBannerProps) {
         setUseLocalStorage(true)
       }
     })
-  }, [isProduction])
+  }, [isProduction, supabase])
 
   const {
     register,
@@ -120,17 +141,10 @@ export default function FormBanner({ banner }: FormBannerProps) {
         bannerData.enlace = data.enlace.trim()
       }
 
-      if (useLocalStorage) {
+      // Em produção, sempre tentar Supabase primeiro
+      if (isProduction || !useLocalStorage) {
         if (banner?.id) {
-          const updated = updateBannerInLocalStorage(banner.id, bannerData)
-          if (!updated) {
-            throw new Error('No se encontró el banner para actualizar')
-          }
-        } else {
-          saveBannerToLocalStorage(bannerData)
-        }
-      } else {
-        if (banner?.id) {
+          // Actualizar banner existente
           const { data: updatedData, error } = await supabase
             .from('banners')
             .update(bannerData)
@@ -138,21 +152,50 @@ export default function FormBanner({ banner }: FormBannerProps) {
             .select()
 
           if (error) {
-            console.error('Error de Supabase:', error)
-            throw error
+            console.error('Error de Supabase al actualizar:', error)
+            // Em produção, mostrar erro claro
+            if (isProduction) {
+              throw new Error(`Error al actualizar el banner: ${error.message || 'Error desconocido'}`)
+            }
+            // Em desenvolvimento, tentar localStorage como fallback
+            const updated = updateBannerInLocalStorage(banner.id, bannerData)
+            if (!updated) {
+              throw new Error('No se encontró el banner para actualizar')
+            }
+            setUseLocalStorage(true)
+          } else {
+            console.log('Banner actualizado exitosamente:', updatedData)
           }
         } else {
+          // Crear nuevo banner
           const { data: insertedData, error } = await supabase
             .from('banners')
             .insert([bannerData])
             .select()
 
           if (error) {
-            console.error('Error de Supabase:', error)
+            console.error('Error de Supabase al crear:', error)
+            // Em produção, mostrar erro claro
+            if (isProduction) {
+              throw new Error(`Error al crear el banner: ${error.message || 'Error desconocido'}. Verifique las políticas RLS en Supabase.`)
+            }
+            // Em desenvolvimento, tentar localStorage como fallback
             saveBannerToLocalStorage(bannerData)
             setUseLocalStorage(true)
             setConnectionStatus('⚠️ Supabase no disponible. Usando modo desarrollo (localStorage).')
+          } else {
+            console.log('Banner creado exitosamente:', insertedData)
           }
+        }
+      } else {
+        // Usar localStorage apenas em desenvolvimento
+        if (banner?.id) {
+          const updated = updateBannerInLocalStorage(banner.id, bannerData)
+          if (!updated) {
+            throw new Error('No se encontró el banner para actualizar')
+          }
+        } else {
+          saveBannerToLocalStorage(bannerData)
         }
       }
 
@@ -170,15 +213,19 @@ export default function FormBanner({ banner }: FormBannerProps) {
       let userMessage = 'Error al guardar el banner'
       
       if (errorMessage.includes('relation') && errorMessage.includes('does not exist')) {
-        userMessage = 'La tabla "banners" no existe. Ejecuta la migración SQL en Supabase.'
+        userMessage = '❌ La tabla "banners" no existe en Supabase.\n\nEjecuta el script SQL en Supabase:\n1. Ve a SQL Editor en tu proyecto Supabase\n2. Ejecuta: lib/supabase/setup-database.sql\n\nO ejecuta solo la parte de banners.'
       } else if (errorMessage.includes('permission denied') || errorMessage.includes('policy') || errorMessage.includes('RLS')) {
-        userMessage = 'Error de permisos. Verifique las políticas RLS en Supabase.'
+        userMessage = '❌ Error de permisos (RLS).\n\nNecesitas configurar las políticas RLS en Supabase:\n1. Ve a Authentication > Policies\n2. Crea una política que permita INSERT/UPDATE para usuarios autenticados\n3. O desactiva RLS temporalmente para la tabla banners (solo desarrollo)'
       } else if (errorMessage.includes('null value') || errorMessage.includes('violates not-null')) {
-        userMessage = 'Faltan campos requeridos. La imagen es obligatoria.'
+        userMessage = '❌ Faltan campos requeridos. La imagen es obligatoria.'
       } else if (errorMessage.includes('fetch') || errorMessage.includes('network') || errorMessage.includes('Failed to fetch') || errorMessage.includes('ECONNREFUSED')) {
-        userMessage = 'Supabase no está corriendo.\n\nPara desarrollo local:\n1. Ejecuta: supabase start\n2. Verifica INICIAR_SUPABASE.md\n\nO usa Supabase en la nube y actualiza .env.local con tus credenciales.'
+        if (isProduction) {
+          userMessage = '❌ Error de conexión con Supabase.\n\nVerifica:\n1. Las variables de entorno en Vercel\n2. NEXT_PUBLIC_SUPABASE_URL\n3. NEXT_PUBLIC_SUPABASE_ANON_KEY'
+        } else {
+          userMessage = 'Supabase no está corriendo.\n\nPara desarrollo local:\n1. Ejecuta: supabase start\n2. Verifica INICIAR_SUPABASE.md\n\nO usa Supabase en la nube y actualiza .env.local con tus credenciales.'
+        }
       } else {
-        userMessage = `Error: ${errorMessage}${errorDetails ? ` (${errorDetails})` : ''}`
+        userMessage = `❌ Error: ${errorMessage}${errorDetails ? `\n\nDetalles: ${errorDetails}` : ''}\n\nCódigo: ${error?.code || 'N/A'}`
       }
       
       alert(userMessage)

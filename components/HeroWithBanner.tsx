@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { FiSearch } from 'react-icons/fi'
+import { createClient } from '@/lib/supabase/client'
 import { getBannersFromLocalStorage } from '@/lib/supabase/local-storage-fallback'
 
 interface Banner {
@@ -19,14 +20,41 @@ export default function HeroWithBanner() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [hasBanners, setHasBanners] = useState(false)
 
-  const loadBanners = () => {
-    const localBanners = getBannersFromLocalStorage()
-      .filter(b => b.activo !== false)
-      .sort((a, b) => (a.orden || 0) - (b.orden || 0))
+  const loadBanners = async () => {
+    const isProduction = process.env.NODE_ENV === 'production'
     
-    if (localBanners.length > 0) {
-      setBanners(localBanners as Banner[])
-      setHasBanners(true)
+    // Em produção, sempre tentar Supabase primeiro
+    if (isProduction) {
+      try {
+        const supabase = createClient()
+        const { data, error } = await supabase
+          .from('banners')
+          .select('*')
+          .eq('activo', true)
+          .order('orden', { ascending: true })
+
+        if (!error && data && data.length > 0) {
+          setBanners(data as Banner[])
+          setHasBanners(true)
+          return
+        }
+      } catch (error) {
+        console.warn('Error al cargar banners desde Supabase:', error)
+      }
+    }
+
+    // Fallback para localStorage (solo en desarrollo)
+    if (!isProduction) {
+      const localBanners = getBannersFromLocalStorage()
+        .filter(b => b.activo !== false)
+        .sort((a, b) => (a.orden || 0) - (b.orden || 0))
+      
+      if (localBanners.length > 0) {
+        setBanners(localBanners as Banner[])
+        setHasBanners(true)
+      } else {
+        setHasBanners(false)
+      }
     } else {
       setHasBanners(false)
     }
@@ -34,7 +62,9 @@ export default function HeroWithBanner() {
 
   useEffect(() => {
     loadBanners()
-    const interval = setInterval(loadBanners, 1000)
+    // En producción, recargar cada 30 segundos
+    // En desarrollo, cada 1 segundo para ver cambios en localStorage
+    const interval = setInterval(loadBanners, process.env.NODE_ENV === 'production' ? 30000 : 1000)
     return () => clearInterval(interval)
   }, [])
 
@@ -137,4 +167,3 @@ export default function HeroWithBanner() {
     </section>
   )
 }
-
