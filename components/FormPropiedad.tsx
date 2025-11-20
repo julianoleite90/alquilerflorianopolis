@@ -204,8 +204,8 @@ export default function FormPropiedad({ propiedad }: FormPropiedadProps) {
       const propiedadData = {
         ...data,
         moneda: (data.moneda || 'USD') as 'USD' | 'BRL',
-        regiao: (data.regiao && data.regiao !== '') ? data.regiao : null,
-        barrio: data.barrio && data.barrio !== '' ? data.barrio : null,
+        regiao: data.regiao || null,
+        barrio: data.barrio || null,
         imagenes,
         caracteristicas,
         precio: parseFloat(data.precio as any),
