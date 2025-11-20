@@ -110,13 +110,15 @@ export default function DashboardLayout({
                   <FiCalendar />
                   <span>Eventos</span>
                 </Link>
-                <Link
-                  href="/dashboard/limpiar-storage"
-                  className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors"
-                >
-                  <FiTrash2 />
-                  <span>Limpiar Storage</span>
-                </Link>
+                {process.env.NODE_ENV !== 'production' && (
+                  <Link
+                    href="/dashboard/limpiar-storage"
+                    className="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-primary-50 hover:text-primary-600 transition-colors"
+                  >
+                    <FiTrash2 />
+                    <span>Limpiar Storage</span>
+                  </Link>
+                )}
               </nav>
 
               <LogoutButton />

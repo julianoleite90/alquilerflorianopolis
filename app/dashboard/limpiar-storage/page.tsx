@@ -9,6 +9,7 @@ import { getPropiedadesFromLocalStorage, getBannersFromLocalStorage } from '@/li
 export default function LimpiarStoragePage() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+  const isProduction = process.env.NODE_ENV === 'production'
   const [propiedades, setPropiedades] = useState(getPropiedadesFromLocalStorage())
   const [banners, setBanners] = useState(getBannersFromLocalStorage())
 
@@ -38,6 +39,34 @@ export default function LimpiarStoragePage() {
     }
   }
 
+  // Em produção, mostrar mensagem informativa
+  if (isProduction) {
+    return (
+      <div className="container-custom py-8">
+        <div className="mb-6">
+          <Link href="/dashboard" className="text-primary-600 hover:text-primary-700 mb-4 inline-block">
+            ← Volver al Dashboard
+          </Link>
+          <h1 className="text-3xl font-bold mb-2">Limpiar Almacenamiento Local</h1>
+        </div>
+        
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+          <h2 className="text-xl font-semibold text-blue-800 mb-3">ℹ️ Información</h2>
+          <p className="text-blue-700 mb-4">
+            En producción, todos los datos se almacenan en Supabase (base de datos en la nube).
+            Esta página solo es útil en desarrollo cuando Supabase no está disponible.
+          </p>
+          <p className="text-blue-700 mb-4">
+            Para gestionar propiedades, banners y eventos en producción, use las secciones correspondientes del dashboard.
+          </p>
+          <p className="text-sm text-blue-600">
+            Si necesita limpiar datos del localStorage del navegador (datos antiguos de pruebas), puede hacerlo manualmente desde las herramientas de desarrollador del navegador.
+          </p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="container-custom py-8">
       <div className="mb-6">
@@ -46,7 +75,7 @@ export default function LimpiarStoragePage() {
         </Link>
         <h1 className="text-3xl font-bold mb-2">Limpiar Almacenamiento Local</h1>
         <p className="text-gray-600">
-          Gestiona el almacenamiento local cuando Supabase no está disponible
+          Gestiona el almacenamiento local cuando Supabase no está disponible (solo desarrollo)
         </p>
       </div>
 
