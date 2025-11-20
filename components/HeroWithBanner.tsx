@@ -79,7 +79,7 @@ export default function HeroWithBanner() {
   const currentBanner = banners[currentIndex]
 
   return (
-    <section className="relative w-full h-[280px] sm:h-[346px] md:h-[450px] overflow-hidden">
+    <section className="relative w-full h-[320px] sm:h-[400px] md:h-[550px] lg:h-[600px] overflow-hidden">
       {/* Banner de fundo ou gradiente */}
       {hasBanners && currentBanner ? (
         <>
@@ -90,8 +90,10 @@ export default function HeroWithBanner() {
                   src={currentBanner.imagen_url}
                   alt={currentBanner.titulo || 'Banner'}
                   fill
-                  className="object-cover"
+                  className="object-cover object-center"
+                  style={{ objectPosition: 'center center' }}
                   priority
+                  sizes="100vw"
                 />
               </div>
             </Link>
@@ -101,8 +103,10 @@ export default function HeroWithBanner() {
                 src={currentBanner.imagen_url}
                 alt={currentBanner.titulo || 'Banner'}
                 fill
-                className="object-cover"
+                className="object-cover object-center"
+                style={{ objectPosition: 'center center' }}
                 priority
+                sizes="100vw"
               />
             </div>
           )}
