@@ -49,11 +49,14 @@ export default function FormPropiedad({ propiedad }: FormPropiedadProps) {
     setValue,
     watch,
   } = useForm<PropiedadInsert>({
-    defaultValues: propiedad || {
+    defaultValues: (propiedad ? {
+      ...propiedad,
+      moneda: propiedad.moneda || 'USD',
+    } : {
       disponible: true,
-      moneda: 'USD' as 'USD' | 'BRL',
+      moneda: 'USD',
       periodo: 'mensal',
-    },
+    }) as PropiedadInsert,
   })
 
   // Watch para atualizar o mapa quando o endereço mudar
