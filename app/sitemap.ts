@@ -5,17 +5,17 @@ import { BARRIOS } from '@/data/barrios'
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://alquilerenflorianopolis.com'
   
-  const routes = [
+  const routes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: 'daily' as const,
+      changeFrequency: 'daily',
       priority: 1,
     },
     {
       url: `${baseUrl}/propiedades`,
       lastModified: new Date(),
-      changeFrequency: 'daily' as const,
+      changeFrequency: 'daily',
       priority: 0.9,
     },
   ]
@@ -24,7 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     routes.push({
       url: `${baseUrl}/barrios/${barrio.slug}`,
       lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
+      changeFrequency: 'weekly',
       priority: 0.85,
     })
   })
@@ -42,7 +42,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         routes.push({
           url: `${baseUrl}/propiedades/${propiedad.id}`,
           lastModified: new Date(propiedad.updated_at),
-          changeFrequency: 'weekly' as const,
+          changeFrequency: 'weekly',
           priority: 0.8,
         })
       })
