@@ -32,16 +32,10 @@ export default function PropiedadesList({ initialPropiedades, limit, regiao, bar
     // Filtrar por región/barrio si se especifica
     let filtered = allPropiedades
     if (regiao) {
-      filtered = filtered.filter(p => {
-        const propiedadRegiao = p.regiao === '' || !p.regiao ? null : p.regiao
-        return propiedadRegiao === regiao
-      })
+      filtered = filtered.filter(p => p.regiao === regiao)
     }
     if (barrio) {
-      filtered = filtered.filter(p => {
-        const propiedadBarrio = p.barrio === '' || !p.barrio ? null : p.barrio
-        return propiedadBarrio === barrio
-      })
+      filtered = filtered.filter(p => p.barrio === barrio)
     }
     
     // Ordenar por fecha de creación

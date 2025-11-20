@@ -24,7 +24,7 @@ export default function GoogleMap({ direccion, ciudad, provincia, height = '400p
     iframe.height = height
     iframe.style.border = '0'
     iframe.loading = 'lazy'
-    iframe.allowFullScreen = true
+    iframe.allowFullscreen = true
     iframe.referrerPolicy = 'no-referrer-when-downgrade'
     
     // Usar Google Maps Embed sem API key
