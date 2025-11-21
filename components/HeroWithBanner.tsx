@@ -85,59 +85,49 @@ export default function HeroWithBanner() {
           {currentBanner.enlace ? (
             <Link href={currentBanner.enlace} className="block w-full">
               <div 
-                className="relative w-full bg-gray-900 flex items-center justify-center"
+                className="relative w-full bg-gray-900 overflow-hidden"
                 style={{
-                  minHeight: '250px',
-                  maxHeight: '350px',
-                  backgroundImage: `url(${currentBanner.imagen_url})`,
-                  backgroundSize: 'contain',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundPosition: 'center center'
+                  height: '350px'
                 }}
               >
                 <img
                   src={currentBanner.imagen_url}
                   alt={currentBanner.titulo || 'Banner'}
-                  className="w-full h-auto max-w-full"
+                  className="w-full h-full"
                   style={{
                     display: 'block',
-                    maxHeight: '350px',
-                    objectFit: 'contain',
+                    objectFit: 'cover',
+                    objectPosition: 'center center',
                     width: '100%',
-                    height: 'auto'
+                    height: '100%'
                   }}
                 />
               </div>
             </Link>
           ) : (
             <div 
-              className="relative w-full bg-gray-900 flex items-center justify-center"
+              className="relative w-full bg-gray-900 overflow-hidden"
               style={{
-                minHeight: '250px',
-                maxHeight: '350px',
-                backgroundImage: `url(${currentBanner.imagen_url})`,
-                backgroundSize: 'contain',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: 'center center'
+                height: '350px'
               }}
             >
               <img
                 src={currentBanner.imagen_url}
                 alt={currentBanner.titulo || 'Banner'}
-                className="w-full h-auto max-w-full"
+                className="w-full h-full"
                 style={{
                   display: 'block',
-                  maxHeight: '350px',
-                  objectFit: 'contain',
+                  objectFit: 'cover',
+                  objectPosition: 'center center',
                   width: '100%',
-                  height: 'auto'
+                  height: '100%'
                 }}
               />
             </div>
           )}
         </>
       ) : (
-        <div className="w-full bg-gradient-to-r from-primary-600 to-primary-800" style={{ minHeight: '250px', maxHeight: '350px' }}></div>
+        <div className="w-full bg-gradient-to-r from-primary-600 to-primary-800" style={{ height: '350px' }}></div>
       )}
 
       {/* Overlay para contraste */}
