@@ -87,7 +87,7 @@ export default function HeroWithBanner() {
               <div 
                 className="relative w-full bg-gray-900 overflow-hidden"
                 style={{
-                  height: '350px'
+                  height: '450px'
                 }}
               >
                 <img
@@ -108,7 +108,7 @@ export default function HeroWithBanner() {
             <div 
               className="relative w-full bg-gray-900 overflow-hidden"
               style={{
-                height: '350px'
+                height: '450px'
               }}
             >
               <img
@@ -127,7 +127,7 @@ export default function HeroWithBanner() {
           )}
         </>
       ) : (
-        <div className="w-full bg-gradient-to-r from-primary-600 to-primary-800" style={{ height: '350px' }}></div>
+        <div className="w-full bg-gradient-to-r from-primary-600 to-primary-800" style={{ height: '450px' }}></div>
       )}
 
       {/* Overlay para contraste */}
