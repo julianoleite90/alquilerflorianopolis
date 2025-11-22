@@ -44,7 +44,7 @@ export const BARRIOS: BarrioCategory[] = [
       'temporada jurere',
     ],
     regiao: 'norte_da_ilha',
-    coverImage: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=60',
+    coverImage: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=60',
     highlights: ['Beach clubs', 'Servicios premium', 'Ambiente exclusivo'],
   },
   {
@@ -72,7 +72,7 @@ export const BARRIOS: BarrioCategory[] = [
       'casas en Campeche',
     ],
     regiao: 'sul_da_ilha',
-    coverImage: 'https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=1200&q=60',
+    coverImage: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=60',
     highlights: ['Spot de surf', 'Gastronomía orgánica', 'Ambiente joven'],
   },
   {
@@ -100,7 +100,7 @@ export const BARRIOS: BarrioCategory[] = [
       'temporada lagoa florianopolis',
     ],
     regiao: 'centro',
-    coverImage: 'https://images.unsplash.com/photo-1482192505345-5655af888cc4?auto=format&fit=crop&w=1200&q=60',
+    coverImage: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=60',
     highlights: ['Vida nocturna', 'Deportes náuticos', 'Vista privilegiada'],
   },
   {
