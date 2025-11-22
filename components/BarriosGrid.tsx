@@ -58,22 +58,17 @@ export default async function BarriosGrid() {
             <Link
               key={barrio.slug}
               href={`/barrios/${barrio.slug}`}
-              className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-xl transition-all"
+              className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-gradient-to-br from-primary-50 via-white to-primary-50 shadow-sm hover:shadow-xl transition-all"
             >
-              <div
-                className="h-40 md:h-48 w-full bg-cover bg-center"
-                style={{ backgroundImage: `url(${barrio.cover_image})` }}
-                aria-hidden
-              >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                <div className="absolute bottom-3 left-4 right-4">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-white/90 text-primary-600 mb-2">
-                    {barrio.regiao === 'norte_da_ilha' ? 'Norte' :
-                      barrio.regiao === 'sul_da_ilha' ? 'Sur' :
-                      barrio.regiao === 'centro' ? 'Centro' : 'Continente'}
-                  </span>
-                  <h3 className="text-white text-xl font-semibold drop-shadow">{barrio.nombre}</h3>
-                </div>
+              <div className="h-40 md:h-48 w-full flex flex-col items-center justify-center px-6">
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-primary-100 text-primary-700 mb-3">
+                  {barrio.regiao === 'norte_da_ilha' ? 'Norte' :
+                    barrio.regiao === 'sul_da_ilha' ? 'Sur' :
+                    barrio.regiao === 'centro' ? 'Centro' : 'Continente'}
+                </span>
+                <h3 className="text-3xl md:text-4xl font-bold text-primary-600 text-center mb-2 group-hover:text-primary-700 transition-colors">
+                  {barrio.nombre}
+                </h3>
               </div>
               <div className="p-5">
                 <p className="text-sm text-gray-600 mb-4 min-h-[48px]">{barrio.descripcion}</p>
