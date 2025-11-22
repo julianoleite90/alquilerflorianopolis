@@ -61,10 +61,36 @@ export default function HeroWithBanner() {
 
   useEffect(() => {
     loadBanners()
-    // En producción, recargar cada 30 segundos
-    // En desarrollo, cada 1 segundo para ver cambios en localStorage
-    const interval = setInterval(loadBanners, process.env.NODE_ENV === 'production' ? 30000 : 1000)
-    return () => clearInterval(interval)
+    
+    // Recargar más frecuentemente para ver cambios rápidos
+    const interval = setInterval(loadBanners, process.env.NODE_ENV === 'production' ? 5000 : 1000)
+    
+    // Recargar cuando la ventana recupera el foco (usuario vuelve a la pestaña)
+    const handleFocus = () => {
+      loadBanners()
+    }
+    window.addEventListener('focus', handleFocus)
+    
+    // Recargar cuando hay cambios en el storage (para desarrollo)
+    const handleStorage = () => {
+      loadBanners()
+    }
+    window.addEventListener('storage', handleStorage)
+    
+    // Recargar cuando la página se vuelve visible
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        loadBanners()
+      }
+    }
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    
+    return () => {
+      clearInterval(interval)
+      window.removeEventListener('focus', handleFocus)
+      window.removeEventListener('storage', handleStorage)
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+    }
   }, [])
 
   useEffect(() => {
