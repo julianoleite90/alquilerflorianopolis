@@ -72,7 +72,7 @@ export const BARRIOS: BarrioCategory[] = [
       'casas en Campeche',
     ],
     regiao: 'sul_da_ilha',
-    coverImage: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=60',
+    coverImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=60',
     highlights: ['Spot de surf', 'Gastronomía orgánica', 'Ambiente joven'],
   },
   {
@@ -100,7 +100,7 @@ export const BARRIOS: BarrioCategory[] = [
       'temporada lagoa florianopolis',
     ],
     regiao: 'centro',
-    coverImage: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=60',
+    coverImage: 'https://images.unsplash.com/photo-1505142468610-359e7d316be0?auto=format&fit=crop&w=1200&q=60',
     highlights: ['Vida nocturna', 'Deportes náuticos', 'Vista privilegiada'],
   },
   {

@@ -1,11 +1,23 @@
 -- Atualizar imagens dos bairros para usar apenas imagens de praia
--- Usando a mesma imagem de praia para todos (pode repetir conforme solicitado)
+-- Cada bairro terá uma imagem de praia diferente
 
--- Imagem de praia do Unsplash (tropical beach)
+-- Jurerê Internacional - Praia com ondas e areia clara
 UPDATE barrios 
 SET cover_image = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=60',
     updated_at = NOW()
-WHERE slug IN ('jurere_internacional', 'campeche', 'lagoa_da_conceicao');
+WHERE slug = 'jurere_internacional';
+
+-- Campeche - Praia com surf e natureza
+UPDATE barrios 
+SET cover_image = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=60',
+    updated_at = NOW()
+WHERE slug = 'campeche';
+
+-- Lagoa da Conceição - Praia com vista panorâmica
+UPDATE barrios 
+SET cover_image = 'https://images.unsplash.com/photo-1505142468610-359e7d316be0?auto=format&fit=crop&w=1200&q=60',
+    updated_at = NOW()
+WHERE slug = 'lagoa_da_conceicao';
 
 -- Verificar as atualizações
 SELECT slug, nombre, cover_image, updated_at
