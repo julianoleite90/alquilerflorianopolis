@@ -8,10 +8,10 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           <div>
           <Link href="/" className="flex items-center space-x-2 md:space-x-3 mb-3 md:mb-4 group">
-            <FiHome className="text-primary-400 text-2xl md:text-3xl flex-shrink-0 transition-transform group-hover:scale-110" />
-            <div className="flex flex-col leading-none">
-              <span className="text-base md:text-lg font-bold text-white tracking-tight">Alquiler en</span>
-              <span className="text-base md:text-lg font-bold text-white tracking-tight">Florianópolis</span>
+            <FiHome className="text-primary-400 text-2xl md:text-3xl lg:text-4xl flex-shrink-0 transition-transform group-hover:scale-110" />
+            <div className="flex flex-col leading-[0.9] -space-y-0.5">
+              <span className="text-base md:text-lg lg:text-xl font-bold text-white tracking-tight">Alquiler en</span>
+              <span className="text-base md:text-lg lg:text-xl font-bold text-white tracking-tight">Florianópolis</span>
             </div>
           </Link>
           <p className="text-xs md:text-sm">
