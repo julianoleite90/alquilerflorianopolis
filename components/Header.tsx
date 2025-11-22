@@ -11,11 +11,11 @@ export default function Header() {
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container-custom py-3 md:py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-1.5 md:space-x-2">
-            <FiHome className="text-primary-600 text-2xl md:text-3xl" />
-            <div className="flex flex-col">
-              <span className="text-sm md:text-lg font-bold text-primary-600 leading-tight">Alquiler en</span>
-              <span className="text-sm md:text-lg font-bold text-primary-600 leading-tight">Florianópolis</span>
+          <Link href="/" className="flex items-center space-x-2 md:space-x-3 group">
+            <FiHome className="text-primary-600 text-2xl md:text-3xl flex-shrink-0 transition-transform group-hover:scale-110" />
+            <div className="flex flex-col leading-none">
+              <span className="text-sm md:text-lg font-bold text-primary-600 tracking-tight">Alquiler en</span>
+              <span className="text-sm md:text-lg font-bold text-primary-600 tracking-tight">Florianópolis</span>
             </div>
           </Link>
           
