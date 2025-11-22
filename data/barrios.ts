@@ -44,7 +44,7 @@ export const BARRIOS: BarrioCategory[] = [
       'temporada jurere',
     ],
     regiao: 'norte_da_ilha',
-    coverImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80',
+    coverImage: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1200&q=80',
     highlights: ['Beach clubs', 'Servicios premium', 'Ambiente exclusivo'],
   },
   {
@@ -100,7 +100,7 @@ export const BARRIOS: BarrioCategory[] = [
       'temporada lagoa florianopolis',
     ],
     regiao: 'centro',
-    coverImage: 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1200&q=80',
+    coverImage: 'https://images.unsplash.com/photo-1471922695134-8f5a67f23b90?auto=format&fit=crop&w=1200&q=80',
     highlights: ['Vida nocturna', 'Deportes náuticos', 'Vista privilegiada'],
   },
   {
