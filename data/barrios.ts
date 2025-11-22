@@ -33,7 +33,20 @@ export const BARRIOS: BarrioCategory[] = [
     coverImage: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=60',
     highlights: ['Ambiente familiar', 'Servicios en español', 'Vida nocturna suave'],
   },
+  {
+    slug: 'jurere_internacional',
+    nombre: 'Jurerê Internacional',
+    descripcion: 'Lujo frente al mar, beach clubs y propiedades premium para estancias sofisticadas.',
+    descripcionSeo: 'Casas y departamentos exclusivos en Jurerê Internacional, la zona más elegante de Florianópolis.',
+    keywords: [
+      'alquiler en Jurerê Internacional',
+      'casas de lujo en Florianópolis',
+      'temporada jurere',
+    ],
+    regiao: 'norte_da_ilha',
     coverImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80',
+    highlights: ['Beach clubs', 'Servicios premium', 'Ambiente exclusivo'],
+  },
   {
     slug: 'ingleses',
     nombre: 'Ingleses',
@@ -59,7 +72,7 @@ export const BARRIOS: BarrioCategory[] = [
       'casas en Campeche',
     ],
     regiao: 'sul_da_ilha',
-    coverImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=60',
+    coverImage: 'https://images.unsplash.com/photo-1505142468610-359e7d316be0?auto=format&fit=crop&w=1200&q=80',
     highlights: ['Spot de surf', 'Gastronomía orgánica', 'Ambiente joven'],
   },
   {
@@ -76,7 +89,20 @@ export const BARRIOS: BarrioCategory[] = [
     coverImage: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=60',
     highlights: ['Ambiente nativo', 'Senderos', 'Playas tranquilas'],
   },
+  {
+    slug: 'lagoa_da_conceicao',
+    nombre: 'Lagoa da Conceição',
+    descripcion: 'Centro artístico con vista a la laguna, deportes náuticos y vida nocturna vibrante.',
+    descripcionSeo: 'Alquiler en Lagoa da Conceição, Florianópolis. Estudios, lofts y casas con vista privilegiada.',
+    keywords: [
+      'alquiler en Lagoa da Conceição',
+      'departamento en la lagoa',
+      'temporada lagoa florianopolis',
+    ],
+    regiao: 'centro',
     coverImage: 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=1200&q=80',
+    highlights: ['Vida nocturna', 'Deportes náuticos', 'Vista privilegiada'],
+  },
   {
     slug: 'ponta_das_canas',
     nombre: 'Ponta das Canas',
