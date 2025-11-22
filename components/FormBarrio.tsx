@@ -250,6 +250,9 @@ export default function FormBarrio({ barrio }: FormBarrioProps) {
           <div>
             <h2 className="text-xl font-bold text-gray-900">Imagen de Portada *</h2>
             <p className="text-sm text-gray-500">Imagen principal del barrio</p>
+            <p className="text-xs text-blue-600 mt-1 font-semibold">
+              📍 Use apenas imagens de praia. Pode repetir a mesma imagem para diferentes bairros.
+            </p>
           </div>
         </div>
         
