@@ -44,6 +44,9 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  verification: {
+    google: 'nknDr90gup-W2AgxK3AkV3Af-ASAa6Biha6jc07c_B4',
+  },
   icons: {
     icon: [
       { url: '/favicon-im.png', type: 'image/png', sizes: 'any' },
